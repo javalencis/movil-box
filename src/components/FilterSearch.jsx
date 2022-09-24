@@ -4,7 +4,7 @@ export const FilterSearch = () => {
     return (
         <div className="FilterSearch">
             <div className='FilterSearch-sup'>
-                <h2>Filtros de Búsqueda</h2>
+                <h3>Filtros de Búsqueda</h3>
                 <button>
                     <img src={iconClean} alt="" />
                     <p>Limpiar Filtros</p>

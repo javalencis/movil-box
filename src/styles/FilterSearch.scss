@@ -52,24 +52,27 @@
     flex-direction: column;
     margin-bottom: 25px;
 
-    input,
-    select {
+    input {
         
         background-color: white;
         border: 1px solid gray;
         border-radius: 5px;
         padding: 10px;
-        color: gray;
+
         font-family: var(--font);
-        -moz-appearance: none;
+
+        &::placeholder{
+            color: rgb(182, 182, 182);
+        }
+        
     }
 
-    option:hover{
-        color: var(--color-primary);
-    }
 
     label {
+        color: gray;
         margin-bottom: 5px;
+        font-size: 12px;
+        letter-spacing: 1px;
     }
 
 
