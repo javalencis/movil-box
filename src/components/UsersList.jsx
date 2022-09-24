@@ -1,10 +1,13 @@
 
 import { RowUser } from "./RowUser"
 import '../styles/UsersList.scss'
+import { useFecthUsers } from "../hooks/useFecthUsers"
 
+export const UsersList = ({ users }) => {
 
-export const UsersList = ({children}) => {
+    const { data: profiles, loading: loadingProfiles } = useFecthUsers('GET_profiles')
     
+    console.log(loadingProfiles)
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(e.target[0].value)
@@ -13,7 +16,7 @@ export const UsersList = ({children}) => {
     return (
         <div className="UsersList">
             <div>
-                <h3>Usuarios</h3>   
+                <h3>Usuarios</h3>
                 <div>
                     <button>Agregar Usuario</button>
                     <button>Exportar</button>
@@ -40,20 +43,34 @@ export const UsersList = ({children}) => {
             </div>
 
             <table>
-                <tbody className="UsersList-table">
-                    <tr>
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Correo <br /> Electrónico</th>
-                        <th>Perfil</th>
-                        <th>Estado</th>
-                        <th>Fecha <br />Modificacion</th>
-                        <th>Acciones</th>
-                    </tr>
-                    {
-                    children
-                    }
-                </tbody>
+                {
+                    !loadingProfiles && (
+                        <tbody className="UsersList-table">
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Correo <br /> Electrónico</th>
+                                <th>Perfil</th>
+                                <th>Estado</th>
+                                <th>Fecha <br />Modificacion</th>
+                                <th>Acciones</th>
+                            </tr>
+                            {
+                                users.map((user, index) => (
+                                    <RowUser
+                                        key={user.id}
+                                        index={index}
+                                        user={user}
+                                        profiles={profiles}
+
+                                    />
+                                ))
+                            }
+                        </tbody>
+
+                    )
+                }
+
             </table>
         </div>
     )
