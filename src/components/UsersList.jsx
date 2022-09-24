@@ -1,17 +1,17 @@
 
-import { useEffect, useState } from "react"
 import { RowUser } from "./RowUser"
+import '../styles/UsersList.scss'
 
 
-
-export const UsersList = ({users}) => {
+export const UsersList = ({children}) => {
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(e.target.select.value)
+        console.log(e.target[0].value)
     }
+
     return (
-        <div>
+        <div className="UsersList">
             <div>
                 <h3>Usuarios</h3>   
                 <div>
@@ -19,7 +19,7 @@ export const UsersList = ({users}) => {
                     <button>Exportar</button>
                 </div>
             </div>
-            <div>
+            <div className="UsersList-form">
                 <form onSubmit={handleSubmit}>
                     <select name="selects" id="select-cant">
                         <option value="5">5</option>
@@ -40,7 +40,7 @@ export const UsersList = ({users}) => {
             </div>
 
             <table>
-                <tbody>
+                <tbody className="UsersList-table">
                     <tr>
                         <th>#</th>
                         <th>Nombre</th>
@@ -50,11 +50,8 @@ export const UsersList = ({users}) => {
                         <th>Fecha <br />Modificacion</th>
                         <th>Acciones</th>
                     </tr>
-
                     {
-                        users?.map((user, index) => (
-                            <RowUser key={user.id} index={index} user={user} />
-                        ))
+                    children
                     }
                 </tbody>
             </table>
