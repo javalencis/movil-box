@@ -64,13 +64,9 @@
         -moz-appearance: none;
     }
 
-
-    select option{
-        
-        margin: 20px 0;
-        font-size: 16px; 
+    option:hover{
+        color: var(--color-primary);
     }
-
 
     label {
         margin-bottom: 5px;

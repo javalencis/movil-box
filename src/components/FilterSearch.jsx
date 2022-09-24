@@ -19,14 +19,14 @@ export const FilterSearch = () => {
                             <input type="text" id='name' placeholder='Nombre de Usuario'/>
                         </div>
                         <div className='form-input'>
-                            <label htmlFor="profile">Perfil</label>
-                            <select name="profile" id="profile">
-                                <option value="perfil" className='op-ph' hidden>Perfil</option>
-                                <option value="Practicante">Practicante</option>
-                                <option value="Desarrollador">Desarrollador</option>
-                                <option value="Vendedor">Vendedor</option>
-                                <option value="Administrador">Administrador</option>
-                            </select>
+                            <label htmlFor="profiles">Perfil</label>
+                            <input list='list-profiles' id='profiles' name='profile' placeholder='Perfil'/>
+                            <datalist id="list-profiles">
+                                <option value="Practicante"/>
+                                <option value="Desarrollador"/>
+                                <option value="Vendedor"/>
+                                <option value="Administrador"/>
+                            </datalist>
                         </div>
 
                     </div>
@@ -36,13 +36,14 @@ export const FilterSearch = () => {
                             <input type="email" id='email' placeholder='Correo Electrónico'/>
                         </div>
                         <div className='form-input'>
-                            <label htmlFor="state">Estado</label>
-                            <select name="state" id="state">
-                                <option value="estado" className='op-ph' hidden>Estado</option>
-                                <option value={1}>Activo</option>
-                                <option value={0}>Inactivo</option>
+                            <label htmlFor="states">Estado</label>
+                            <input list='list-states' id="states" name='state' placeholder='Estado'/>
+                            <datalist id="list-states" >
+                        
+                                <option value="Activo"/>
+                                <option value="Inactivo"/>
 
-                            </select>
+                            </datalist>
                         </div>
 
                     </div>
