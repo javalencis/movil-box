@@ -9,7 +9,7 @@ export const App = () => {
   const { data: profiles, loading: loadingProfiles } = useFecthUsers('GET_profiles')
 
   const { data: users, loading:loadingUsers } = useFecthUsers('GET_users')
-
+  console.log(loadingProfiles)
   return (
     <div className="AppContainer">
       <LateralLeft />

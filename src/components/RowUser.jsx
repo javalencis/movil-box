@@ -11,9 +11,7 @@ export const RowUser = ({ user, index, profiles }) => {
         <tr className='RowUser'>
             <td>{index}</td>
             <td>
-                <div>
-                    {(user.name.charAt)}
-                </div>
+              
                 {user.name}</td>
             <td>{user.email}</td>
             <td>{profile(user, profiles)}</td>
