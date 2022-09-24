@@ -2,4 +2,44 @@
     background-color: white;
     height: 50px;
     border-bottom:3px solid #e4e4e4;
+    color: gray;
+
+}
+
+.RowUser-name{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-weight: 500;
+    height: 50px;
+    color: #606e7b;
+}
+.logoName{
+    background-color: #e0f7f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-right: 10px;
+    color: #02bbba;
+}
+.RowUser-state{
+    text-align: center;
+    p{
+        border-radius: 10px;
+        padding: 0 5px;
+        font-weight: 400;
+    }
+
+    .activo{
+        background-color: #e4f9ee;
+        color: #31c975;
+    }
+
+    .inactivo{
+        background-color: #dfe2e4;
+        color: #606e7b;
+    }
 }
