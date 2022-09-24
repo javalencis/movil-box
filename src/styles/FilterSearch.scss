@@ -1,0 +1,80 @@
+.FilterSearch {
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--border-radius-cont);
+    margin-top: 30px;
+
+    &>div {
+        margin-bottom: 20px;
+    }
+}
+
+.FilterSearch-sup {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+        width: 140px;
+        border-radius: 5px;
+        background-color: white;
+        border: 1px solid var(--color-primary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        color: var(--color-primary);
+        cursor: pointer;
+
+    }
+}
+
+.FilterSearch-form {
+
+    form {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+
+        &>div {
+            flex-grow: 1;
+        }
+
+
+
+    }
+
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+
+    input,
+    select {
+        
+        background-color: white;
+        border: 1px solid gray;
+        border-radius: 5px;
+        padding: 10px;
+        color: gray;
+        font-family: var(--font);
+        -moz-appearance: none;
+    }
+
+
+    select option{
+        
+        margin: 20px 0;
+        font-size: 16px; 
+    }
+
+
+    label {
+        margin-bottom: 5px;
+    }
+
+
+}
