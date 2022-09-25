@@ -2,14 +2,17 @@
 import iconClose from '../assets/icons/X.svg'
 import '../styles/AddUser.scss'
 
-export const AddUser = () => {
+export const AddUser = ({setOpenAddUser}) => {
 
+    const handleSetOpenAddUser = () => {
+        setOpenAddUser(e=>!e)
+    }
     return (
         <div className='bg'>
             <div className="AddUser">
                 <div className="header">
                     <h4>Agregar Nuevo Usuario</h4>
-                    <div>
+                    <div onClick={handleSetOpenAddUser}>
                         <img src={iconClose} alt="" />
                     </div>
                 </div>
@@ -31,7 +34,7 @@ export const AddUser = () => {
                     </datalist>
                     <div className="buttons">
                         <button type="submit">Aceptar</button>
-                        <button type="button">Cancelar</button>
+                        <button type="button" onClick={handleSetOpenAddUser}>Cancelar</button>
                     </div>
                 </form>
             </div></div>

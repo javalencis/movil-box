@@ -26,7 +26,7 @@ export const App = () => {
         )
       }
       {
-        openAddUser &&  <AddUser/>
+        openAddUser &&  <AddUser setOpenAddUser={setOpenAddUser}/>
       }
       
     </>
