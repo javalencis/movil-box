@@ -44,24 +44,44 @@ export const useFecthUsers = (method, idUsers = 0) => {
 
     }
 
-    const postFecthUser = async (url,body) => {
+    const postFecthUser = async (url, body) => {
 
         const options = {
             method: 'POST',
-            body:JSON.stringify(body),
+            body: JSON.stringify(body),
             headers: {
                 'Content-Type': 'application/json'
-       
-              },
+
+            },
         }
         try {
             const res = await fetch(url + '/1152215097/users', options)
             const data = await res.json()
             setData(data)
         } catch (error) {
-            console.log('Error')
+            console.log(error)
         }
-       
+
+    }
+
+    const putFecthUser = async (url,body) => {
+ 
+        const options = {
+            method: 'PUT',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+
+            },
+        }
+        try {
+            const res = await fetch(url, options)
+            const data = await res.json()
+            setData(data)
+
+        } catch (error) {
+            console.log(error)
+        }
 
     }
 
@@ -78,16 +98,22 @@ export const useFecthUsers = (method, idUsers = 0) => {
 
     }, [])
 
-    if(method === 'POST'){
-        return {   
-            data, 
+    if (method === 'POST') {
+        return {
+            data,
             postUser: postFecthUser
         }
-    }else{
+    }else if(method === 'PUT'){
+        return {
+            data,
+            putUser: putFecthUser   
+        }
+    }   
+    else {
         return {
             data,
             loading
         };
     }
-  
+
 }
