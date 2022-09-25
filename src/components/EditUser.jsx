@@ -3,34 +3,51 @@ import iconClose from '../assets/icons/X.svg'
 import { AppContext } from '../context/AppContext'
 import { profile } from '../helpers'
 import { useFecthUsers } from '../hooks/useFecthUsers'
+import { EditUserError } from '../modals/EditUserError'
+import { EditUserGood } from '../modals/EditUserGood'
+import { EditUserSave } from '../modals/EditUserSave'
+import { LayoutModal } from '../modals/LayoutModal'
 
 const urlGet = 'http://pruebasclaro.movilbox.net:81/desarrollo/test_mbox/public/api/1152215097/users/'
 export const EditUser = () => {
 
 
     const { profiles, loadingProfiles, setOpenEditUser, userID } = useContext(AppContext)
-
-    const {data: dataPut , putUser} = useFecthUsers('PUT')
+    const { data: dataPutUser, putUser, loading } = useFecthUsers('PUT')
+    const [openModal, setOpenModal] = useState(false)
+    const [checkPut, setCheckPut] = useState(false)
+    const [userPut, setUserPut] = useState({})
+    
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
         const prof = profiles.find(p => (p.name.toLowerCase() === e.target[2].value.toLowerCase()))
 
-        const state = e.target[2].value === 'Activo' ? 1: 0
+        const state = e.target[3].value === 'Activo' ? 1 : 0
 
         const user = {
             name: e.target[0].value,
-            email:e.target[1].value,
+            email: e.target[1].value,
             profile: prof.id,
             state
         }
-        const urlID = urlGet + userID.id
-        putUser(urlID,user)
+        setUserPut(user)
+        setOpenModal(true)
     }
+
+
+
 
     const handleSetOpenEditUser = () => {
         setOpenEditUser(e => !e)
+    }
+
+
+    const submitUpdate = () => {
+        const urlID = urlGet + userID.id
+        putUser(urlID, userPut)
+
     }
 
     return (
@@ -48,6 +65,7 @@ export const EditUser = () => {
                     <input id="setNameUser" type="text" placeholder="Nombre de Usuario" required defaultValue={userID.name} />
 
                     <label htmlFor="setEmail">Correo Electrónico <span>*</span></label>
+
                     <input id="setEmail" type="email" placeholder="Correo Electrónico" required defaultValue={userID.email} />
 
                     <label htmlFor="setProfile">Perfil <span>*</span></label>
@@ -73,10 +91,41 @@ export const EditUser = () => {
                     </datalist>
 
                     <div className="buttons">
-                        <button type="submit">Guardar Cambios</button>
+                        <button type="submit" >Guardar Cambios</button>
                         <button type="button" onClick={handleSetOpenEditUser}>Cancelar</button>
                     </div>
                 </form>
-            </div></div>
+            </div>
+
+            {
+                
+                openModal && (
+                    <LayoutModal>
+                        {!checkPut && <EditUserSave
+                            submitUpdate={submitUpdate}
+                            setCheckPut={setCheckPut}
+                            setOpenModal={setOpenModal} />
+                        }
+                        {checkPut && (
+                            !loading && (
+                                dataPutUser?.status ? (
+
+                                <EditUserGood setOpenEditUser={setOpenEditUser} />
+                                    
+                                ):(
+                                 <EditUserError setOpenModal={setOpenModal}/>
+                                )
+
+                            )
+                            
+                        )
+                        }
+
+                    </LayoutModal>
+                )
+
+            }
+
+        </div>
     )
 }

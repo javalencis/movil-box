@@ -65,7 +65,7 @@ export const useFecthUsers = (method, idUsers = 0) => {
     }
 
     const putFecthUser = async (url,body) => {
- 
+        
         const options = {
             method: 'PUT',
             body: JSON.stringify(body),
@@ -78,9 +78,12 @@ export const useFecthUsers = (method, idUsers = 0) => {
             const res = await fetch(url, options)
             const data = await res.json()
             setData(data)
+           
 
         } catch (error) {
-            console.log(error)
+            console.log(e)
+        }finally{
+            setLoading(false)
         }
 
     }
@@ -106,7 +109,8 @@ export const useFecthUsers = (method, idUsers = 0) => {
     }else if(method === 'PUT'){
         return {
             data,
-            putUser: putFecthUser   
+            putUser: putFecthUser,
+            loading
         }
     }   
     else {
