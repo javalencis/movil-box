@@ -1,0 +1,94 @@
+.bg{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: -60px;
+    bottom: 0;
+    background-color: #00000050;
+}
+
+.AddUser {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+
+    .header {
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f9f9f8;
+        padding: 0 20px;
+
+        h4 {
+            color: #5f5872;
+        }
+        img{
+            cursor: pointer;
+        }
+
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        padding: 0 20px;
+        margin-top: 30px;
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        span {
+            color: red;
+        }
+
+        input {
+            padding: 10px;
+            background-color: white;
+            border: 1px solid gray;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-family: var(--font);
+            &::placeholder{
+                color: rgb(182, 182, 182);
+            }
+        }
+    }
+
+    button{
+        margin-top: 30px;
+        font-family: var(--font);
+        padding: 10px 20px;
+        margin-right: 20px;
+        font-size: 16px;
+        letter-spacing: 1px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.5s;
+
+        &:nth-child(1){
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            
+        }
+        &:nth-child(2){
+            background-color: white;
+            color: var(--color-primary);
+            border: 1px solid var(--color-primary);
+            
+        }
+
+        &:nth-child(1):hover,
+        &:nth-child(2):hover{
+           transform: scale(1.05);
+        }
+       
+    }
+}

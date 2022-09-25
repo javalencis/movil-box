@@ -1,3 +1,5 @@
+import { useState } from "react"
+import { AddUser } from "../components/AddUser"
 import { FilterSearch } from "../components/FilterSearch"
 import { Header } from "../components/Header"
 import { LateralLeft } from "../components/LateralLeft"
@@ -6,21 +8,27 @@ import { useFecthUsers } from "../hooks/useFecthUsers"
 
 export const App = () => {
 
+  const [openAddUser, setOpenAddUser] = useState(false)
 
   const { data: users, loading: loadingUsers } = useFecthUsers('GET_users')
 
   return (
-    <div className="AppContainer">
+    <>
       <LateralLeft />
       <Header />  
       <FilterSearch />
-
       {
         !(loadingUsers) && (
-          <UsersList users={users} />
+          <UsersList 
+            users={users} 
+            setOpenAddUser={setOpenAddUser}
+            />
         )
       }
-
-    </div>
+      {
+        openAddUser &&  <AddUser/>
+      }
+      
+    </>
   )
 }

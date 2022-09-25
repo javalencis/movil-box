@@ -1,4 +1,5 @@
 
+import { useState } from 'react'
 import iconDots from '../assets/icons/Dots.svg'
 import '../styles/RowUser.scss'
 import { MenuCrud } from './MenuCrud'
@@ -30,6 +31,14 @@ const formatDate = (date) => {
 
 export const RowUser = ({ user, index, profiles }) => {
 
+    const [clickDots, setClickDots] = useState(false)
+
+    const handleClickMenu = () => {
+        setClickDots(!clickDots)
+    }
+
+
+
     return (
         <tr className={`RowUser ${user.state ? 'activo' : 'inactivo'}`}>
             <td>{index+1}</td>
@@ -44,9 +53,14 @@ export const RowUser = ({ user, index, profiles }) => {
                 <p className={user.state ? 'activo' : 'inactivo'}> {user.state ? 'Activo' : 'Inactivo'}</p>
             </td>
             <td>{formatDate(user.updated_at)}</td>
-            <td className='iconDots'><img src={iconDots} alt="" />
+            <td className='iconDots' onClick={handleClickMenu}><img src={iconDots} alt="" />
                 
             </td>
+
+            {
+                clickDots && <MenuCrud/>
+            }
+
         </tr>
     )
 }
