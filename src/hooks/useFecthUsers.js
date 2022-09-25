@@ -28,9 +28,6 @@ export const useFecthUsers = (method, idUsers = 0) => {
         const data = await res.json()
         setData(data.user)
 
-
-
-
     }
 
     const getFecthProfiles = async (url) => {
@@ -47,11 +44,31 @@ export const useFecthUsers = (method, idUsers = 0) => {
 
     }
 
+    const postFecthUser = async (url,body) => {
+
+        const options = {
+            method: 'POST',
+            body:JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+       
+              },
+        }
+        try {
+            const res = await fetch(url + '/1152215097/users', options)
+            const data = await res.json()
+            console.log(data.message)
+        } catch (error) {
+            console.log(error)
+        }
+       
+
+    }
+
 
 
     useEffect(() => {
         if (method === 'GET_users') {
-
             getFecthUsers(urlGet)
         } else if (method === 'GET_user') {
             getFecthUser(urlGet)
@@ -61,9 +78,15 @@ export const useFecthUsers = (method, idUsers = 0) => {
 
     }, [])
 
-
-    return {
-        data,
-        loading
-    };
+    if(method === 'POST'){
+        return {    
+            postUser: postFecthUser
+        }
+    }else{
+        return {
+            data,
+            loading
+        };
+    }
+  
 }
