@@ -1,0 +1,44 @@
+.CreateUser {
+    background-color: white;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    gap: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+
+    .msg1 {
+        color: var(--color-tertiary);
+        font-size: 24px;
+    }
+
+    .msg2,
+    .msg4 {
+        color: var(--color-secondary);
+    }
+
+    .msg3 {
+        color: var(--color-tertiary);
+    }
+
+    button {
+
+        font-family: var(--font);
+        padding: 10px 20px;
+
+        font-size: 16px;
+        letter-spacing: 1px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.5s;
+
+        background-color: var(--color-primary);
+        color: white;
+        border: none;
+
+    }
+
+}

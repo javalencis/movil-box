@@ -1,33 +1,46 @@
 
-import { useEffect } from 'react'
-import iconClose from '../assets/icons/X.svg'
 import { useFecthUsers } from '../hooks/useFecthUsers'
+import { CreateUser } from '../modals/CreateUser'
+import { LayoutModal } from '../modals/LayoutModal'
+import iconClose from '../assets/icons/X.svg'
 import '../styles/AddUser.scss'
+import { useState } from 'react'
+import { CreateUserError } from '../modals/CreateUserError'
+import { CreateUserCancel } from '../modals/CreateUserCancel'
 const urlGet = 'http://pruebasclaro.movilbox.net:81/desarrollo/test_mbox/public/api'
 
-
 export const AddUser = ({ setOpenAddUser }) => {
-    const { postUser } = useFecthUsers('POST')
+
+    const [openModal, setOpenModal] = useState(false)
+    const [openModalCancel, setOpenModalCancel] = useState(false)
+
+    const { data: dataPost, postUser } = useFecthUsers('POST')
 
     const { data: profiles, loading: loadingProfiles } = useFecthUsers('GET_profiles')
-
+    console.log('actualizacion')
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const profile = profiles.find(p =>(p.name.toLowerCase()===e.target[2].value.toLowerCase()))
-        
+        const profile = profiles.find(p => (p.name.toLowerCase() === e.target[2].value.toLowerCase()))
+
         const user = {
-            name:e.target[0].value,
-            email:e.target[1].value,
+            name: e.target[0].value,
+            email: e.target[1].value,
             profile: profile.id
         }
 
-        postUser(urlGet,user)
-
+        postUser(urlGet, user)
+        setOpenModal(true)
     }
 
     const handleSetOpenAddUser = () => {
         setOpenAddUser(e => !e)
+    }
+
+    const handleOpenModelCancel = () => {
+
+        setOpenModalCancel(true)
+
     }
     return (
         <div className='bg'>
@@ -65,10 +78,38 @@ export const AddUser = ({ setOpenAddUser }) => {
 
                     <div className="buttons">
                         <button type="submit">Aceptar</button>
-                        <button type="button" onClick={handleSetOpenAddUser}>Cancelar</button>
+                        <button type="button" onClick={handleOpenModelCancel}>Cancelar</button>
                     </div>
                 </form>
-            </div></div>
+            </div>
+            {
+                openModal && (
+                    <LayoutModal>
+                        {dataPost.status && (
+                            <CreateUser 
+                                email={dataPost.user.email}
+                                setOpenAddUser={setOpenAddUser} />)}
+                        {!dataPost.status && (
+                            <CreateUserError 
+                                setOpenModal={setOpenModal} />)}
+                    </LayoutModal>
+                )
+
+            }
+
+            {
+                !openModal && (openModalCancel && (
+                    <LayoutModal>
+                        <CreateUserCancel
+                            setOpenAddUser={setOpenAddUser}
+                            setOpenModalCancel={setOpenModalCancel}
+                        />
+                    </LayoutModal>
+                )
+                )
+            }
+
+        </div>
 
     )
 }

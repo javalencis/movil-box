@@ -57,9 +57,9 @@ export const useFecthUsers = (method, idUsers = 0) => {
         try {
             const res = await fetch(url + '/1152215097/users', options)
             const data = await res.json()
-            console.log(data.message)
+            setData(data)
         } catch (error) {
-            console.log(error)
+            console.log('Error')
         }
        
 
@@ -79,7 +79,8 @@ export const useFecthUsers = (method, idUsers = 0) => {
     }, [])
 
     if(method === 'POST'){
-        return {    
+        return {   
+            data, 
             postUser: postFecthUser
         }
     }else{
