@@ -1,4 +1,5 @@
 
+import iconDots from '../assets/icons/Dots.svg'
 import '../styles/RowUser.scss'
 
 
@@ -17,12 +18,20 @@ const logoName = (name) => {
 
 }
 
+const formatDate = (date) => {
+    const dateA = date.split('T')
+    const fecha =  dateA[0].split('-').join('/')
+    const hora = dateA[1].substring(0,5)
+
+    return fecha +' - '+hora
+}
+
 
 export const RowUser = ({ user, index, profiles }) => {
 
     return (
-        <tr className='RowUser'>
-            <td>{index}</td>
+        <tr className={`RowUser ${user.state ? 'activo' : 'inactivo'}`}>
+            <td>{index+1}</td>
             <td className='RowUser-name'>
                 <div className='logoName'>
                     {logoName(user.name)}
@@ -33,8 +42,8 @@ export const RowUser = ({ user, index, profiles }) => {
             <td className='RowUser-state'>
                 <p className={user.state ? 'activo' : 'inactivo'}> {user.state ? 'Activo' : 'Inactivo'}</p>
             </td>
-            <td>{user.updated_at}</td>
-            <td>.</td>
+            <td>{formatDate(user.updated_at)}</td>
+            <td className='iconDots'><img src={iconDots} alt="" /></td>
         </tr>
     )
 }

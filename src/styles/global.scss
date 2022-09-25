@@ -1,7 +1,7 @@
 
 :root{
     --border-radius-cont : 10px;
-    --color-primary: #99CF16;
+    --color-primary: #99cf16;
     --font:'Roboto', sans-serif;
 }
 *{
@@ -11,12 +11,15 @@
 }
 
 body{
-    background-color: #f6f6f6;
+    background-color: #f4f5f5;
     font-family: var(--font);
     font-weight: 300;
 }
 button{
     font-family:var(--font);
+}
+h3{
+    color: #645f79;
 }
 li{
     list-style: none;

@@ -12,7 +12,7 @@ export const App = () => {
   return (
     <div className="AppContainer">
       <LateralLeft />
-      <Header />
+      <Header />  
       <FilterSearch />
 
       {

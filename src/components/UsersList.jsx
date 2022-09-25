@@ -1,12 +1,13 @@
 
 import { RowUser } from "./RowUser"
-import '../styles/UsersList.scss'
 import { useFecthUsers } from "../hooks/useFecthUsers"
-
+import iconUp from '../assets/icons/ChevronUP.svg'
+import iconRefresh from '../assets/icons/Refresh.svg'
+import '../styles/UsersList.scss'
 export const UsersList = ({ users }) => {
 
     const { data: profiles, loading: loadingProfiles } = useFecthUsers('GET_profiles')
-    
+
     console.log(loadingProfiles)
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -16,37 +17,41 @@ export const UsersList = ({ users }) => {
     return (
         <div className="UsersList">
             <div>
-                <h3>Usuarios</h3>
-                <div>
-                    <button>Agregar Usuario</button>
-                    <button>Exportar</button>
+                <div className="UsersList-up">
+                    <h3>USUARIOS</h3>
+                    <div>
+                        <button className="btAddUser">Agregar Usuario</button>
+                        <button className="btExport">Exportar</button>
+                    </div>
+                </div>
+                <div className="UsersList-form">
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="select-cant">Ver</label>
+                        <select name="selects" id="select-cant">
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                        <button type="submit">
+                            <img src={iconRefresh} alt="" />
+                        </button>
+                    </form>
+                    <div className="form--search">
+                        <label >
+                            Buscar
+                            <input type="text" placeholder="Buscar" />
+                        </label>
+                    </div>
                 </div>
             </div>
-            <div className="UsersList-form">
-                <form onSubmit={handleSubmit}>
-                    <select name="selects" id="select-cant">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                    </select>
-                    <button type="submit">
-                        C
-                    </button>
-                </form>
-                <div>
-                    <label >
-                        Buscar:
-                        <input type="text" placeholder="Buscar" />
-                    </label>
-                </div>
-            </div>
+
 
             <table>
                 {
                     !loadingProfiles && (
                         <tbody className="UsersList-table">
-                            <tr>
+                            <tr className="table-headers">
                                 <th>#</th>
                                 <th>Nombre</th>
                                 <th>Correo <br /> Electrónico</th>
