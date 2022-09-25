@@ -54,7 +54,7 @@ export const EditUser = () => {
         <div className='bg'>
             <div className="Container">
                 <div className="header">
-                    <h4>Agregar Nuevo Usuario</h4>
+                    <h4>Editar Usuario</h4>
                     <div onClick={handleSetOpenEditUser}>
                         <img src={iconClose} alt="" />
                     </div>
