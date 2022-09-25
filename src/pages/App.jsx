@@ -1,16 +1,15 @@
-import { useState } from "react"
+import { useContext} from "react"
 import { AddUser } from "../components/AddUser"
+import { EditUser } from "../components/EditUser"
 import { FilterSearch } from "../components/FilterSearch"
 import { Header } from "../components/Header"
 import { LateralLeft } from "../components/LateralLeft"
 import { UsersList } from "../components/UsersList"
-import { useFecthUsers } from "../hooks/useFecthUsers"
+import { AppContext } from "../context/AppContext"
 
 export const App = () => {
 
-  const [openAddUser, setOpenAddUser] = useState(false)
-
-  const { data: users, loading: loadingUsers } = useFecthUsers('GET_users')
+  const {openAddUser,openEditUser,loadingUsers} = useContext(AppContext)
 
   return (
     <>
@@ -19,15 +18,17 @@ export const App = () => {
       <FilterSearch />
       {
         !(loadingUsers) && (
-          <UsersList 
-            users={users} 
-            setOpenAddUser={setOpenAddUser}
-            />
+          <UsersList  />
         )
       }
       {
-        openAddUser &&  <AddUser setOpenAddUser={setOpenAddUser}/>
+        openAddUser &&  <AddUser/>
       }
+      {
+        openEditUser &&  <EditUser/>
+      }
+
+
       
     </>
   )

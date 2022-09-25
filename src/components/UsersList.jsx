@@ -1,13 +1,16 @@
 
 import { RowUser } from "./RowUser"
-import { useFecthUsers } from "../hooks/useFecthUsers"
+
 import iconUp from '../assets/icons/ChevronUP.svg'
 import iconRefresh from '../assets/icons/Refresh.svg'
 import '../styles/UsersList.scss'
+import { useContext } from "react"
+import { AppContext } from "../context/AppContext"
 
-export const UsersList = ({ users,setOpenAddUser}) => {
+export const UsersList = () => {
 
-    const { data: profiles, loading: loadingProfiles } = useFecthUsers('GET_profiles')
+    const {users,setOpenAddUser,loadingProfiles} = useContext(AppContext)
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -69,9 +72,6 @@ export const UsersList = ({ users,setOpenAddUser}) => {
                                         key={user.id}
                                         index={index}
                                         user={user}
-                                        profiles={profiles}
-                                        setOpenAddUser={setOpenAddUser}
-                                        
                                     />
                                 ))
                             }

@@ -4,19 +4,20 @@ import { CreateUser } from '../modals/CreateUser'
 import { LayoutModal } from '../modals/LayoutModal'
 import iconClose from '../assets/icons/X.svg'
 import '../styles/AddUser.scss'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { CreateUserError } from '../modals/CreateUserError'
 import { CreateUserCancel } from '../modals/CreateUserCancel'
+import { AppContext } from '../context/AppContext'
 const urlGet = 'http://pruebasclaro.movilbox.net:81/desarrollo/test_mbox/public/api'
 
-export const AddUser = ({ setOpenAddUser }) => {
+export const AddUser = () => {
+    const {setOpenAddUser,profiles,loadingProfiles} = useContext(AppContext)
 
     const [openModal, setOpenModal] = useState(false)
     const [openModalCancel, setOpenModalCancel] = useState(false)
 
     const { data: dataPost, postUser } = useFecthUsers('POST')
 
-    const { data: profiles, loading: loadingProfiles } = useFecthUsers('GET_profiles')
     console.log('actualizacion')
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -44,7 +45,7 @@ export const AddUser = ({ setOpenAddUser }) => {
     }
     return (
         <div className='bg'>
-            <div className="AddUser">
+            <div className="Container">
                 <div className="header">
                     <h4>Agregar Nuevo Usuario</h4>
                     <div onClick={handleSetOpenAddUser}>

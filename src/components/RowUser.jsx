@@ -1,36 +1,17 @@
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import iconDots from '../assets/icons/Dots.svg'
+import { AppContext } from '../context/AppContext'
 import '../styles/RowUser.scss'
 import { MenuCrud } from './MenuCrud'
 
-
-const profile = (user, profiles) => {
-    const p = profiles.find(profile => profile.id === user.profile)
-    return p.name.charAt(0).toUpperCase() + p.name.slice(1)
-}
-
-const logoName = (name) => {
-    const pNames = name.split(' ')
-    if (pNames.length == 1) {
-        return pNames[0].charAt(0)
-    } else {
-        return pNames[0].charAt(0) + pNames[1].charAt(0)
-    }
-
-}
-
-const formatDate = (date) => {
-    const dateA = date.split('T')
-    const fecha =  dateA[0].split('-').join('/')
-    const hora = dateA[1].substring(0,5)
-
-    return fecha +' - '+hora
-}
+import {profile,formatDate,logoName } from '../helpers'
 
 
-export const RowUser = ({ user, index, profiles }) => {
 
+export const RowUser = ({ index,user }) => {
+
+    const {profiles} = useContext(AppContext)
     const [clickDots, setClickDots] = useState(false)
 
     const handleClickMenu = () => {
@@ -58,7 +39,7 @@ export const RowUser = ({ user, index, profiles }) => {
             </td>
 
             {
-                clickDots && <MenuCrud/>
+                clickDots && <MenuCrud user={user}/>
             }
 
         </tr>
