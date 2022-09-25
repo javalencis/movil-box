@@ -1,6 +1,7 @@
 
 import iconDots from '../assets/icons/Dots.svg'
 import '../styles/RowUser.scss'
+import { MenuCrud } from './MenuCrud'
 
 
 const profile = (user, profiles) => {
@@ -43,7 +44,9 @@ export const RowUser = ({ user, index, profiles }) => {
                 <p className={user.state ? 'activo' : 'inactivo'}> {user.state ? 'Activo' : 'Inactivo'}</p>
             </td>
             <td>{formatDate(user.updated_at)}</td>
-            <td className='iconDots'><img src={iconDots} alt="" /></td>
+            <td className='iconDots'><img src={iconDots} alt="" />
+                
+            </td>
         </tr>
     )
 }

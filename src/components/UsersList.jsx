@@ -4,6 +4,7 @@ import { useFecthUsers } from "../hooks/useFecthUsers"
 import iconUp from '../assets/icons/ChevronUP.svg'
 import iconRefresh from '../assets/icons/Refresh.svg'
 import '../styles/UsersList.scss'
+import { MenuCrud } from "./MenuCrud"
 export const UsersList = ({ users }) => {
 
     const { data: profiles, loading: loadingProfiles } = useFecthUsers('GET_profiles')
@@ -77,6 +78,8 @@ export const UsersList = ({ users }) => {
                 }
 
             </table>
+          
+    
         </div>
     )
 }
