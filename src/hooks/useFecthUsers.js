@@ -64,8 +64,8 @@ export const useFecthUsers = (method, idUsers = 0) => {
 
     }
 
-    const putFecthUser = async (url,body) => {
-        
+    const putFecthUser = async (url, body) => {
+
         const options = {
             method: 'PUT',
             body: JSON.stringify(body),
@@ -78,13 +78,32 @@ export const useFecthUsers = (method, idUsers = 0) => {
             const res = await fetch(url, options)
             const data = await res.json()
             setData(data)
-           
+
 
         } catch (error) {
             console.log(e)
-        }finally{
+        } finally {
             setLoading(false)
         }
+
+    }
+
+    const delFecthUser = async (url = urlGet) => {
+        const options = {
+            method: 'DELETE',
+     
+        }
+
+        try {
+            const res = await fetch(url + `/1152215097/users/${idUsers}`,options)
+            const data = await res.json()
+            setData(data.user)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
+
 
     }
 
@@ -106,13 +125,19 @@ export const useFecthUsers = (method, idUsers = 0) => {
             data,
             postUser: postFecthUser
         }
-    }else if(method === 'PUT'){
+    } else if (method === 'PUT') {
         return {
             data,
             putUser: putFecthUser,
             loading
         }
-    }   
+    } else if (method === 'DEL') {
+        return {
+            data,
+            delFecthUser,
+            loading
+        }
+    }
     else {
         return {
             data,

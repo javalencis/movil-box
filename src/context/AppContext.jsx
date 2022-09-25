@@ -8,6 +8,9 @@ export function AppProvider({ children }) {
 
     const [openAddUser, setOpenAddUser] = useState(false)
     const [openEditUser, setOpenEditUser] = useState(false)
+    const [openDeleteUser, setOpenDeleteUser] = useState(false)
+    const [openSeeUser, setOpenSeeUser] = useState(false)
+
     const [userID, setUserID] = useState({})
 
     const { data: users, loading: loadingUsers } = useFecthUsers('GET_users')
@@ -27,8 +30,10 @@ export function AppProvider({ children }) {
                 loadingProfiles,
                 userID,
                 setUserID,
-  
-
+                openDeleteUser, 
+                setOpenDeleteUser,
+                openSeeUser, 
+                setOpenSeeUser
             }}
         
         >
