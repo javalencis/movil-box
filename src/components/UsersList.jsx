@@ -4,7 +4,7 @@ import { RowUser } from "./RowUser"
 import iconUp from '../assets/icons/ChevronUP.svg'
 import iconRefresh from '../assets/icons/Refresh.svg'
 import '../styles/UsersList.scss'
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../context/AppContext"
 import { Pagination } from "./Pagination"
 
@@ -16,25 +16,30 @@ export const UsersList = ({ searchValue }) => {
 
     let usersList = []
 
-    let usersAux = []
-
+    let usersAux = users
     
-    if (searchValue.value.toString().length >= 1) {
-       
-        if (searchValue.field === 'name') {
-            usersAux = users.filter(u => u.name.toLowerCase().includes(searchValue.value.toLowerCase()))
-        } else if (searchValue.field === 'email') {
-            usersAux = users.filter(u => u.email.toLowerCase().includes(searchValue.value.toLowerCase()))
-        } else if (searchValue.field === 'states') {
-            usersAux = users.filter(u => u.state === searchValue.value)
-        } else if (searchValue.field === 'profiles') {
 
-            usersAux = users.filter(u => u.profile === searchValue.value)
-        }
-
-    } else {
-        usersAux = users
+    if (searchValue.name.length >1) {
+        usersAux = users.filter(u => u.name.toLowerCase().includes(searchValue.name.toLowerCase()))
+  
     }
+
+    if (searchValue.email.length > 1) {
+        usersAux = usersAux.filter(u => u.email.toLowerCase().includes(searchValue.email.toLowerCase()))
+
+    }
+
+    if (searchValue.state !== "") {
+        usersAux = usersAux.filter(u => u.state === searchValue.state)
+
+    }
+
+    if (searchValue.profile !== "") {
+
+        usersAux = usersAux.filter(u => u.profile === searchValue.profile)
+    }
+
+
 
     if (usersAux.length >= pagination) {
 
@@ -42,6 +47,9 @@ export const UsersList = ({ searchValue }) => {
     } else {
         usersList = usersAux
     }
+
+
+
 
 
 

@@ -14,7 +14,7 @@ export const App = () => {
 
   const { openAddUser, openEditUser,openSeeUser, loadingUsers, openDeleteUser } = useContext(AppContext)
 
-  const [searchValue, setSearchValue] = useState({field:"",value:""})
+  const [searchValue, setSearchValue] = useState({name:"",email:"",profile:"",state:""})
   
 
   return (

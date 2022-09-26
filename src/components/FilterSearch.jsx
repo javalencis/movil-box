@@ -2,41 +2,72 @@ import { useContext, useState } from 'react'
 import iconClean from '../assets/icons/Clean.svg'
 import { AppContext } from '../context/AppContext'
 import '../styles/FilterSearch.scss'
+
+const defaultForm = {
+    name: "", 
+    email: "", 
+    profile: "", 
+    state: ""
+}
+
+
 export const FilterSearch = ({ setSearchValue }) => {
     const { profiles, loadingProfiles } = useContext(AppContext)
-    const [valueForm,setValueForm] = useState('')
+    const [valueName, setValueName] = useState('')
+    const [valueEmail, setValueEmail] = useState('')
+    const [valueState, setValueState] = useState('')
+    const [valueProfiles, setValueProfile] = useState('')
 
 
-
-    const handleChangeForm = (e) => {
-        setValueForm(e.target.value)
-        let value = ''
-        if (e.target.id === 'profiles') {
-
-            const prof = profiles.find(p => (p.name.toLowerCase() === e.target.value.toLowerCase()))
-            if (prof) {
-                value = prof.id
-            }
-
-        } else if (e.target.id === 'states') {
-
-            const state = e.target.value === 'Activo' ? 1 : 0
-
-            value = state
-        } else {
-            value = e.target.value
-        }
-
-
-        setSearchValue({
-            field: e.target.id,
-            value
-        })
-
+    const handleValueName = (e) => {
+        setSearchValue((m) => ({ ...m, name: e.target.value }))
+        setValueName(e.target.value)
     }
 
+
+    const handleValueEmail = (e) => {
+        setSearchValue((m) => ({ ...m, email: e.target.value }))
+        setValueEmail(e.target.value)
+    }
+
+
+    const handleValueState = (e) => {
+
+
+        const state = ()=> {
+            if(e.target.value === 'Activo'){
+                return 1
+            }else if(e.target.value === 'Inactivo'){
+                return 0
+            }else{
+                return ""
+            }
+
+        }
+  
+        setSearchValue((m) => ({ ...m, state: state() }))
+        setValueState(e.target.value)
+    }
+
+
+    const handleValueProfile = (e) => {
+        const prof = profiles.find(p => (p.name.toLowerCase() === e.target.value.toLowerCase()))
+        if (prof) {
+            
+            setSearchValue((m) => ({ ...m, profile: prof.id }))
+        }else{
+            setSearchValue((m) => ({ ...m, profile: ''}))
+        }
+        setValueProfile(e.target.value)
+    }
+
+
     const handleClean = () => {
-        setValueForm('')
+        setValueName("")
+        setValueEmail("")
+        setValueState("")
+        setValueProfile("")
+        setSearchValue(defaultForm)
     }
 
     return (
@@ -50,15 +81,15 @@ export const FilterSearch = ({ setSearchValue }) => {
             </div>
 
             <div className='FilterSearch-form'>
-                <form onChange={handleChangeForm} value={valueForm}>
+                <form>
                     <div className='form-left'>
                         <div className='form-input'>
                             <label htmlFor="name" >Nombre</label>
-                            <input type="text" id='name' placeholder='Nombre de Usuario' />
+                            <input type="text" id='name' placeholder='Nombre de Usuario' onChange={handleValueName} value={valueName} />
                         </div>
                         <div className='form-input'>
                             <label htmlFor="profiles">Perfil</label>
-                            <input list='list-profiles' id='profiles' name='profile' placeholder='Perfil' />
+                            <input list='list-profiles' id='profiles' name='profile' placeholder='Perfil' onChange={handleValueProfile} value={valueProfiles} />
                             <datalist id="list-profiles">
                                 {
 
@@ -78,11 +109,11 @@ export const FilterSearch = ({ setSearchValue }) => {
                     <div className='form-rigth'>
                         <div className='form-input'>
                             <label htmlFor="email">Correo Electrónico</label>
-                            <input type="email" id='email' placeholder='Correo Electrónico' />
+                            <input type="email" id='email' placeholder='Correo Electrónico' onChange={handleValueEmail} value={valueEmail} />
                         </div>
                         <div className='form-input'>
                             <label htmlFor="states">Estado</label>
-                            <input list='list-states' id="states" name='state' placeholder='Estado' />
+                            <input list='list-states' id="states" name='state' placeholder='Estado' onChange={handleValueState} value={valueState} />
                             <datalist id="list-states" >
 
                                 <option value="Activo" />
