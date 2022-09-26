@@ -1,10 +1,13 @@
+import { useContext } from 'react'
 import iconChangeOk from '../assets/icons/ChangeOk.svg'
+import { AppContext } from '../context/AppContext'
 import '../styles/EditUserGood.scss'
 
 export const EditUserGood = ({setOpenEditUser}) => {
-
+    const {setRefresh} = useContext(AppContext)
     const handleClickContinue = () => {
         setOpenEditUser(e=>!e)
+        setRefresh(r=>!r)
     }
 
     return (

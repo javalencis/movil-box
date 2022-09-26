@@ -1,9 +1,14 @@
+import { useContext } from 'react'
 import iconUsers from '../assets/icons/Users.svg'
+import { AppContext } from '../context/AppContext'
 import '../styles/CreateUser.scss'
 export const CreateUser = ({ email, setOpenAddUser }) => {
 
+    const {setRefresh} = useContext(AppContext)
+
     const handleSetOpenAddUser = () => {
         setOpenAddUser(e=>!e)
+        setRefresh(r=>!r)
     }
     return (
         <div className='CreateUser'>

@@ -7,7 +7,7 @@ export const useFecthUsers = (method, idUsers = 0) => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
 
-    const getFecthUsers = async (url) => {
+    const getFecthUsers = async (url=urlGet) => {
         try {
             const res = await fetch(url + '/1152215097/users/index')
             const data = await res.json()
@@ -98,6 +98,7 @@ export const useFecthUsers = (method, idUsers = 0) => {
             const res = await fetch(url + `/1152215097/users/${idUsers}`,options)
             const data = await res.json()
             setData(data.user)
+            
         } catch (error) {
             console.log(error)
         } finally {
@@ -141,7 +142,8 @@ export const useFecthUsers = (method, idUsers = 0) => {
     else {
         return {
             data,
-            loading
+            loading,
+            getFecthUsers
         };
     }
 

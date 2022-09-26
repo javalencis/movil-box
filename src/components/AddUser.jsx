@@ -18,7 +18,7 @@ export const AddUser = () => {
 
     const { data: dataPost, postUser } = useFecthUsers('POST')
 
-    console.log('actualizacion')
+
     const handleSubmit = (e) => {
         e.preventDefault()
 

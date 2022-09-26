@@ -7,13 +7,16 @@ import '../styles/DeleteUserModal.scss'
 
 
 export const DeleteUserModal = () => {
-    const { userID, setOpenDeleteUser } = useContext(AppContext)
+    const { userID, setOpenDeleteUser, setRefresh } = useContext(AppContext)
 
     const { delFecthUser } = useFecthUsers('DEL', userID.id)
 
     const handleClickDelete = () => {
-        delFecthUser();
-        setOpenDeleteUser(e => !e)
+        delFecthUser().then(() => {
+            setOpenDeleteUser(e => !e)
+            setRefresh(r => !r)
+        });
+
     }
 
     const handleCloseDelete = () => {
@@ -28,7 +31,7 @@ export const DeleteUserModal = () => {
             <p className='msg1'>¿Estas seguro de eliminar <br /> el usuario seleccionado?</p>
 
             <div>
-                <button onClick={handleClickDelete}>Aceptar</button>
+                <button onClick={handleClickDelete}>Eliminar</button>
                 <button onClick={handleCloseDelete}>Cancelar</button>
             </div>
 

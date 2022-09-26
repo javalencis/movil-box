@@ -48,7 +48,7 @@ export const UsersList = () => {
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="select-cant">Ver</label>
                         <select name="selects" id="select-cant" defaultValue={10}>
-                            <option value="5">{5}</option>
+                            <option value="5">5</option>
                             <option value="10" >10</option>
                             <option value="20">20</option>
                             <option value="50">50</option>
@@ -84,7 +84,7 @@ export const UsersList = () => {
                                 usersList.map((user, index) => (
                                     <RowUser
                                         key={user.id}
-                                        index={index}
+                                        index={index + offset*pagination}
                                         user={user}
                                     />
                                 ))

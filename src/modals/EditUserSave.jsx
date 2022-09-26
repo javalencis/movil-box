@@ -6,6 +6,8 @@ import '../styles/EditUserSave.scss'
 
 export const EditUserSave = ({submitUpdate,setOpenModal,setCheckPut}) => {
 
+
+    
     const handleClickPut = () => {
         submitUpdate()
         setCheckPut(e=>!e)
