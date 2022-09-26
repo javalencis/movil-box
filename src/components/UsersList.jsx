@@ -8,7 +8,7 @@ import { useContext, useState } from "react"
 import { AppContext } from "../context/AppContext"
 import { Pagination } from "./Pagination"
 
-export const UsersList = () => {
+export const UsersList = ({ searchValue }) => {
 
     const { users, setOpenAddUser, loadingProfiles, pagination, setPagination } = useContext(AppContext)
 
@@ -16,11 +16,34 @@ export const UsersList = () => {
 
     let usersList = []
 
-    if (users.length >= pagination) {
-        usersList = users.slice(pagination * offset, (pagination) * (offset + 1))
+    let usersAux = []
+
+    
+    if (searchValue.value.toString().length >= 1) {
+       
+        if (searchValue.field === 'name') {
+            usersAux = users.filter(u => u.name.toLowerCase().includes(searchValue.value.toLowerCase()))
+        } else if (searchValue.field === 'email') {
+            usersAux = users.filter(u => u.email.toLowerCase().includes(searchValue.value.toLowerCase()))
+        } else if (searchValue.field === 'states') {
+            usersAux = users.filter(u => u.state === searchValue.value)
+        } else if (searchValue.field === 'profiles') {
+
+            usersAux = users.filter(u => u.profile === searchValue.value)
+        }
+
     } else {
-        usersList = users
+        usersAux = users
     }
+
+    if (usersAux.length >= pagination) {
+
+        usersList = usersAux.slice(pagination * offset, (pagination) * (offset + 1))
+    } else {
+        usersList = usersAux
+    }
+
+
 
 
 
@@ -28,7 +51,7 @@ export const UsersList = () => {
         e.preventDefault()
         const number = parseInt(e.target[0].value)
         setPagination(number)
-       
+
     }
 
     const handleOpenAddUSer = () => {
@@ -84,7 +107,7 @@ export const UsersList = () => {
                                 usersList.map((user, index) => (
                                     <RowUser
                                         key={user.id}
-                                        index={index + offset*pagination}
+                                        index={index + offset * pagination}
                                         user={user}
                                     />
                                 ))
@@ -96,7 +119,7 @@ export const UsersList = () => {
 
             </table>
 
-          <Pagination offset={offset} setOffset={setOffset}/>
+            <Pagination usersAux={usersAux} offset={offset} setOffset={setOffset} />
 
         </div>
     )

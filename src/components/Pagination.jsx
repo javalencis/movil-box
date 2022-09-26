@@ -2,11 +2,11 @@ import { useContext } from "react"
 import { AppContext } from "../context/AppContext"
 import '../styles/Pagination.scss'
 
-export const Pagination = ({offset,setOffset}) => {
+export const Pagination = ({offset,setOffset,usersAux}) => {
 
-    const {users, pagination} = useContext(AppContext)
+    const { pagination} = useContext(AppContext)
 
-    const pages= Math.ceil(users.length/pagination)
+    const pages= Math.ceil(usersAux.length/pagination)
     const handleBeforePage = () => {
         setOffset((offset)=> (offset>1)?(offset-1):0)
     }

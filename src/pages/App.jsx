@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { AddUser } from "../components/AddUser"
 import { EditUser } from "../components/EditUser"
 import { FilterSearch } from "../components/FilterSearch"
@@ -14,16 +14,17 @@ export const App = () => {
 
   const { openAddUser, openEditUser,openSeeUser, loadingUsers, openDeleteUser } = useContext(AppContext)
 
+  const [searchValue, setSearchValue] = useState({field:"",value:""})
   
 
   return (
     <>
       <LateralLeft />
       <Header />
-      <FilterSearch />
+      <FilterSearch setSearchValue={setSearchValue}/>
       {
         !(loadingUsers) && (
-          <UsersList />
+          <UsersList searchValue={searchValue}/>
         )
       }
       {openAddUser && <AddUser />}

@@ -22,7 +22,7 @@ export function AppProvider({ children }) {
 
     useEffect(()=>{
         getFecthUsers()
-        console.log("first")
+
     },[refresh])
 
     users.sort((user1, user2) => {
