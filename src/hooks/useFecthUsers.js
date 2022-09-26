@@ -8,9 +8,9 @@ export const useFecthUsers = (method, idUsers = 0) => {
     const [loading, setLoading] = useState(true)
 
     const getFecthUsers = async (url=urlGet) => {
- 
+        
         try {
-            const res = await fetch(url + '/1152215097/users/index')
+            const res = await fetch(url + '/1152215097/users/index',{credentials:'include'})
             const data = await res.json()
             setData(data.users)
         } catch (e) {

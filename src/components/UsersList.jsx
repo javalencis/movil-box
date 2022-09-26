@@ -1,13 +1,13 @@
 
 import { RowUser } from "./RowUser"
-import imgEmpty from '../assets/imgs/EmptyState.png'
 import iconUp from '../assets/icons/ChevronUP.svg'
-import iconRefresh from '../assets/icons/Refresh.svg'
 import '../styles/UsersList.scss'
 import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../context/AppContext"
 import { Pagination } from "./Pagination"
 import { filterSearchAll, filterSearchInputAll } from "../helpers"
+import imgEmpty from '../assets/imgs/EmptyState.png'
+import iconRefresh from '../assets/icons/Refresh.svg'
 
 
 
