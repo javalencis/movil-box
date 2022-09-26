@@ -4,12 +4,24 @@ import { RowUser } from "./RowUser"
 import iconUp from '../assets/icons/ChevronUP.svg'
 import iconRefresh from '../assets/icons/Refresh.svg'
 import '../styles/UsersList.scss'
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { AppContext } from "../context/AppContext"
+import { Pagination } from "./Pagination"
 
 export const UsersList = () => {
 
-    const {users,setOpenAddUser,loadingProfiles} = useContext(AppContext)
+    const { users, setOpenAddUser, loadingProfiles, pagination, setPagination } = useContext(AppContext)
+
+    const [offset, setOffset] = useState(0)
+
+    let usersList = []
+
+    if (users.length >= pagination) {
+        usersList = users.slice(pagination * offset, (pagination) * (offset + 1))
+    } else {
+        usersList = users
+    }
+
 
 
     const handleSubmit = (e) => {
@@ -33,7 +45,7 @@ export const UsersList = () => {
                 <div className="UsersList-form">
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="select-cant">Ver</label>
-                        <select name="selects" id="select-cant"  defaultValue={10}>
+                        <select name="selects" id="select-cant" defaultValue={10}>
                             <option value="5">5</option>
                             <option value="10" >10</option>
                             <option value="20">20</option>
@@ -67,7 +79,7 @@ export const UsersList = () => {
                                 <th>Acciones</th>
                             </tr>
                             {
-                                users.map((user, index) => (
+                                usersList.map((user, index) => (
                                     <RowUser
                                         key={user.id}
                                         index={index}
@@ -81,8 +93,9 @@ export const UsersList = () => {
                 }
 
             </table>
-          
-    
+
+          <Pagination/>
+
         </div>
     )
 }
