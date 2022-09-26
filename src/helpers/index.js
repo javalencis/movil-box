@@ -27,7 +27,7 @@ export const formatDate = (date) => {
 }
 
 
-export const filterSearchAll = (users,searchValue) => {
+export const filterSearchAll = (users, searchValue) => {
     let usersAux = users
 
 
@@ -45,6 +45,21 @@ export const filterSearchAll = (users,searchValue) => {
 
         usersAux = usersAux.filter(u => u.profile === searchValue.profile)
     }
+
+    return usersAux
+
+}
+
+export const filterSearchInputAll = (users, searchInput) => {
+
+    let usersAux = users
+    if (searchInput.length > 1) {
+
+        usersAux = users.filter(u => u.name.toLowerCase().includes(searchInput.toLowerCase()))
+
+        usersAux = usersAux.filter(u => u.email.toLowerCase().includes(searchInput.toLowerCase()))
+    }
+
 
     return usersAux
 

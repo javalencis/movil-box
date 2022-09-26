@@ -7,7 +7,7 @@ import '../styles/UsersList.scss'
 import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../context/AppContext"
 import { Pagination } from "./Pagination"
-import { filterSearchAll } from "../helpers"
+import { filterSearchAll, filterSearchInputAll } from "../helpers"
 
 
 
@@ -16,24 +16,18 @@ export const UsersList = ({ searchValue }) => {
     const { users, setOpenAddUser, loadingProfiles, pagination, setPagination } = useContext(AppContext)
 
     const [offset, setOffset] = useState(0)
+    const [searchInput, setSearchInput] = useState('')
+    const [usersAux, setUsersAux] = useState(users)
 
     let usersList = []
 
-    let usersAux = filterSearchAll(users,searchValue)
-
-    
-
-    if (usersAux.length >= pagination) {
-
-        usersList = usersAux.slice(pagination * offset, (pagination) * (offset + 1))
-    } else {
-        usersList = usersAux
+    const handleFilter = () => {
+        setUsersAux(filterSearchAll(users, searchValue))
     }
 
-
-
-
-
+    useEffect(() => {
+        handleFilter()
+    }, [searchValue])
 
 
 
@@ -47,6 +41,23 @@ export const UsersList = ({ searchValue }) => {
     const handleOpenAddUSer = () => {
         setOpenAddUser(e => !e)
     }
+    const handleSearch = (e) => {
+
+        let uAux = filterSearchAll(users, searchValue)
+        setUsersAux(filterSearchInputAll(uAux, e.target.value))
+
+        setSearchInput(e.target.value)
+
+    }
+
+
+    if (usersAux.length >= pagination) {
+
+        usersList = usersAux.slice(pagination * offset, (pagination) * (offset + 1))
+    } else {
+        usersList = usersAux
+    }
+
     return (
         <div className="UsersList">
             <div>
@@ -73,7 +84,7 @@ export const UsersList = ({ searchValue }) => {
                     <div className="form--search">
                         <label >
                             Buscar
-                            <input type="text" placeholder="Buscar" />
+                            <input type="text" placeholder="Buscar" value={searchInput} onChange={handleSearch} />
                         </label>
                     </div>
                 </div>
@@ -111,7 +122,7 @@ export const UsersList = ({ searchValue }) => {
             </table>
             {
                 (usersList.length === 0) && (
-                    <div  className="ImgEmpty">
+                    <div className="ImgEmpty">
 
                         <img src={imgEmpty} />
                     </div>
