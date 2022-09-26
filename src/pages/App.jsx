@@ -19,7 +19,6 @@ export const App = () => {
 
   return (
     <>
-      <LateralLeft />
       <Header />
       <FilterSearch setSearchValue={setSearchValue}/>
       {

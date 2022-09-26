@@ -9,4 +9,44 @@
     align-items: center;
     padding: 10px;
     border-radius: var(--border-radius-cont);
+
+    .icons{
+        
+        img{
+            width: 20px;
+            margin-right: 15px;
+        }
+    }
+
+    .info{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        .language{
+            font-weight: 500;
+        }
+        .icons-rigth{
+            img{
+                width: 20px;
+                margin-right: 15px;
+            }
+        }
+
+        .username{
+            font-weight: 500;
+        }
+        .profile{
+            font-size: 14px;
+        }
+
+        .logo-name{
+            background-color: white;
+            font-weight: bold;
+            color: var( --color-secondary);
+            padding: 8px;
+            border-radius: 100px;
+        }    
+    }
 }
