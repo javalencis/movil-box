@@ -1,6 +1,6 @@
 
 import { RowUser } from "./RowUser"
-
+import imgEmpty from '../assets/imgs/EmptyState.png'
 import iconUp from '../assets/icons/ChevronUP.svg'
 import iconRefresh from '../assets/icons/Refresh.svg'
 import '../styles/UsersList.scss'
@@ -17,11 +17,11 @@ export const UsersList = ({ searchValue }) => {
     let usersList = []
 
     let usersAux = users
-    
 
-    if (searchValue.name.length >1) {
+
+    if (searchValue.name.length > 1) {
         usersAux = users.filter(u => u.name.toLowerCase().includes(searchValue.name.toLowerCase()))
-  
+
     }
 
     if (searchValue.email.length > 1) {
@@ -120,13 +120,21 @@ export const UsersList = ({ searchValue }) => {
                                     />
                                 ))
                             }
+
                         </tbody>
 
                     )
                 }
 
             </table>
+            {
+                (usersList.length === 0) && (
+                    <div  className="ImgEmpty">
 
+                        <img src={imgEmpty} />
+                    </div>
+                )
+            }
             <Pagination usersAux={usersAux} offset={offset} setOffset={setOffset} />
 
         </div>
