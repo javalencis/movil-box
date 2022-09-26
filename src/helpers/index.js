@@ -14,9 +14,16 @@ export const logoName = (name) => {
 }
 
 export const formatDate = (date) => {
-    const dateA = date.split('T')
-    const fecha =  dateA[0].split('-').join('/')
-    const hora = dateA[1].substring(0,5)
-
-    return fecha +' - '+hora
+    const d = new Date(date)
+     const f = {
+        day: d.getDate().toString().padStart(2,'0'),
+        month: (d.getMonth()+1).toString().padStart(2,'0'),
+        year: d.getFullYear(),
+        hours: d.getHours().toString().padStart(2,'0'),
+        minutes: d.getMinutes().toString().padStart(2,'0')
+    } 
+  
+    return `${f.day}/${f.month}/${f.year} - ${f.hours}:${f.minutes}` 
 }
+
+

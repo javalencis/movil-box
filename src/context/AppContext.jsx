@@ -17,7 +17,12 @@ export function AppProvider({ children }) {
 
     const { data: profiles, loading: loadingProfiles } = useFecthUsers('GET_profiles')
 
-    return(
+
+    users.sort((user1, user2) => {
+        return (new Date(user2.updated_at) - new Date(user1.updated_at))
+    })
+
+    return (
         <AppContext.Provider
             value={{
                 openAddUser,
@@ -30,12 +35,12 @@ export function AppProvider({ children }) {
                 loadingProfiles,
                 userID,
                 setUserID,
-                openDeleteUser, 
+                openDeleteUser,
                 setOpenDeleteUser,
-                openSeeUser, 
+                openSeeUser,
                 setOpenSeeUser
             }}
-        
+
         >
             {children}
         </AppContext.Provider>
