@@ -26,7 +26,9 @@ export const UsersList = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(e.target[0].value)
+        const number = parseInt(e.target[0].value)
+        setPagination(number)
+       
     }
 
     const handleOpenAddUSer = () => {
@@ -46,7 +48,7 @@ export const UsersList = () => {
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="select-cant">Ver</label>
                         <select name="selects" id="select-cant" defaultValue={10}>
-                            <option value="5">5</option>
+                            <option value="5">{5}</option>
                             <option value="10" >10</option>
                             <option value="20">20</option>
                             <option value="50">50</option>
