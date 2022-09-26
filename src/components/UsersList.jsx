@@ -94,7 +94,7 @@ export const UsersList = () => {
 
             </table>
 
-          <Pagination/>
+          <Pagination offset={offset} setOffset={setOffset}/>
 
         </div>
     )

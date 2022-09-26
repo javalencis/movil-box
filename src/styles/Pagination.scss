@@ -1,0 +1,31 @@
+.Pagination{
+    width: 180px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    button{
+        color: var(--color-primary);    
+        font-weight: bold;
+        font-size: 20px;
+        background-color: #e4e4e4;
+        width: 28px;
+        height: 28px;
+        border-radius: 100px;
+        border: none;
+        cursor: pointer;
+
+    
+    }
+    .pages{
+        color: var(--color-tertiary);
+        font-weight: 400;
+        span{
+            background-color: var(--color-primary);
+            color: white;
+            padding:5px;
+            border-radius: 100px;
+         
+        }
+    }
+}

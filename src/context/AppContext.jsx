@@ -10,7 +10,7 @@ export function AppProvider({ children }) {
     const [openEditUser, setOpenEditUser] = useState(false)
     const [openDeleteUser, setOpenDeleteUser] = useState(false)
     const [openSeeUser, setOpenSeeUser] = useState(false)
-    const [pagination, setPagination] = useState(2)
+    const [pagination, setPagination] = useState(10)
 
     const [userID, setUserID] = useState({})
 
