@@ -7,6 +7,9 @@ import '../styles/UsersList.scss'
 import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../context/AppContext"
 import { Pagination } from "./Pagination"
+import { filterSearchAll } from "../helpers"
+
+
 
 export const UsersList = ({ searchValue }) => {
 
@@ -16,30 +19,9 @@ export const UsersList = ({ searchValue }) => {
 
     let usersList = []
 
-    let usersAux = users
+    let usersAux = filterSearchAll(users,searchValue)
 
-
-    if (searchValue.name.length > 1) {
-        usersAux = users.filter(u => u.name.toLowerCase().includes(searchValue.name.toLowerCase()))
-
-    }
-
-    if (searchValue.email.length > 1) {
-        usersAux = usersAux.filter(u => u.email.toLowerCase().includes(searchValue.email.toLowerCase()))
-
-    }
-
-    if (searchValue.state !== "") {
-        usersAux = usersAux.filter(u => u.state === searchValue.state)
-
-    }
-
-    if (searchValue.profile !== "") {
-
-        usersAux = usersAux.filter(u => u.profile === searchValue.profile)
-    }
-
-
+    
 
     if (usersAux.length >= pagination) {
 
